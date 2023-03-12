@@ -134,4 +134,3 @@ EMAIL_HOST_USER = 'poramok@gmail.com'
 EMAIL_HOST_PASSWORD = 'csugkqbaqhjzztzv'
 EMAIL_PORT = 25
 EMAIL_USE_TLS = True
-EMAIL_USE_SSL=True

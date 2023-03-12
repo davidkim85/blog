@@ -1,0 +1,193 @@
+{% load static %}
+{% load embed_video_tags %}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Responsive Portfolio Template for Developers</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive HTML5 Website Landing Page for Developers">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="{%static 'blog/favicon.ico'%}">
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> 
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{% static 'blog/assets/plugins/bootstrap/css/bootstrap.min.css'%}">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="{% static 'blog/assets/plugins/font-awesome/css/font-awesome.css'%}">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+    
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="{%static 'blog/assets/css/styles.css'%}">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+
+    
+</head>
+
+<body>
+    <!-- ******HEADER****** -->
+    <header class="header">
+        <div class="container">
+            <img class="profile-image img-responsive pull-left" src="{% static 'blog/assets/images/profile.png'%}" alt="James Lee" />
+            <div class="profile-content pull-left">
+                <h1 class="name">David Furman</h1>
+                <h2 class="desc">Web App Developer</h2>
+                <ul class="social list-inline">
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="#"><i class="fa fa-github-alt"></i></a></li>
+                    <li class="last-item"><a href="#"><i class="fa fa-hacker-news"></i></a></li>
+                </ul>
+            </div><!--//profile-->
+            <a class="btn btn-cta-primary pull-right" href="http://themes.3rdwavemedia.com/" target="_blank"><i class="fa fa-paper-plane"></i> Contact Me</a>
+        </div><!--//container-->
+    </header><!--//header-->
+
+    <div class="container sections-wrapper">
+        <div class="row">
+            <div class="primary col-md-8 col-sm-12 col-xs-12">
+               <section class="latest section">
+                    <div class="section-inner">
+                         <a class="btn btn-cta-secondary" style="margin-bottom: 10px" href="{% url "blog:post_list" %}">Back to Menu <i class="fa fa-chevron-left"></i></a>
+                        <div class="content">
+                            <div class="item featured text-center">
+                                <h3 class="title" style="padding-bottom: 15px">{{post.title}}</h3>
+                                <div class="featured-image">
+                                    <img class="img-responsive project-image center-block" src="{{ post.image.url }}" alt="url">
+                                </div>
+                                <div class="desc text-left">
+                                    <p>{{post.body}}</p>
+                                </div><!--//desc-->
+                                <p style="font-family: georgia, serif; font-size: 12px;font-style: italic;text-align: right;color: #479FC8"><i class="fa fa-copyright"></i> Posted by {{ post.author.username.capitalize}} Published {{post.publish}}</p>
+                            </div><!--//item-->
+
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </section><!--//section-->
+
+                <section class="projects section">
+                    <div class="section-inner">
+                        {% with comments.count as total_comments %}
+                        <h2 class="heading">Comments:
+                            {{ total_comments }}
+                        </h2>
+                        {% endwith %}
+                    <hr class="divider" />
+                        {% for comment in comments %}
+                        <div>
+                            <p><i class="fa fa-comment"> </i>{{ comment.body|linebreaks }}</p>
+                            <p style="font-family: georgia, serif; font-size: 12px;font-style: italic;text-align: right;color: #479FC8"><i class="fa fa-user"></i> Published by {{ comment.name }} at {{ comment.created}}</p>
+                        <hr class="divider" />
+
+                        </div>
+                        {% empty %}
+                        <p>There are no comments.</p>
+                        {% endfor %}
+                        <div class="content">
+                              <h2 class="heading">Add a new comment</h2>
+                                <form action="{% url "blog:post_comment" post.id %}" method="post">
+                                    {% csrf_token %}
+                                    <div style="margin: auto;max-width: 300px;padding-top: 1%;">
+                                    <div class="form-group">
+                                        <label>Name: </label>
+                                        {{ form.name }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email: </label>
+                                        {{ form.email }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Comment: </label>
+                                        {{ form.body }}
+                                    </div>
+                                        </div>
+
+                                    <p><input type="submit" class="btn btn-primary btn-block" value="Add comment"></p>
+                                </form>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </section><!--//section-->
+
+
+
+            </div><!--//primary-->
+            <div class="secondary col-md-4 col-sm-12 col-xs-12">
+                 <aside class="info aside section">
+                    <div class="section-inner">
+                        <h2 class="heading sr-only">Basic Information</h2>
+                        <div class="content">
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-map-marker"></i><span class="sr-only">Location:</span>Afula, Israel</li>
+                                <li><i class="fa fa-envelope-o"></i><span class="sr-only">Email:</span><a href="#">poramok@gmail.com</a></li>
+                                <li><i class="fa fa-link"></i><span class="sr-only">Website:</span><a href="#">http://www.website.com</a></li>
+                            </ul>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </aside><!--//aside-->
+
+                    <aside class="testimonials aside section" style="height: 400px;" >
+                               {% video post.url '100% x 100%'%}
+                </aside><!--//section-->
+
+                <aside class="testimonials aside section">
+                    <div class="section-inner">
+                        <h2 class="heading"><i class="fa fa-mail-forward"></i> Send Post to mail</h2>
+                        <div class="content">
+                            <div class="item">
+                              {% if sent %}
+                                <p style="font-family: georgia, serif; font-size: 12px;font-style: italic;text-align: center;color: #479FC8"><i class="fa fa-send"></i> "Successfully sent to {{ emailPost.cleaned_data.email}}"</p>
+                                {% else %}
+                                  <form action="{% url "blog:post_share" post.id %}" method="post">
+                                  {% csrf_token %}
+                                  <div style="align-items: center">
+                                    <div class="form-group" style="text-align: center">
+                                        <label>Name:</label>
+                                        {{ emailPost.name }}
+                                    </div>
+                                    <div class="form-group" style="text-align: center">
+                                        <label>Email:</label>
+                                        {{ emailPost.email }}
+                                    </div>
+                                {% csrf_token %}
+                                  <p><input type="submit" class="btn btn-primary btn-block" value="Send e-mail"></p>
+                                  </div>
+                                </form>
+                                {% endif %}
+                            </div><!--//item-->
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </aside><!--//section-->
+
+
+
+
+
+            </div><!--//secondary-->
+        </div><!--//row-->
+    </div><!--//masonry-->
+
+    <!-- ******FOOTER****** -->
+    <footer class="footer">
+        <div class="container text-center">
+                <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+                <small class="copyright">Designed with <i class="fa fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">David Furman</a> for recruiters</small>
+        </div><!--//container-->
+    </footer><!--//footer-->
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="{% static 'blog/assets/plugins/jquery-1.11.3.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'blog/assets/plugins/bootstrap/js/bootstrap.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'blog/assets/plugins/jquery-rss/dist/jquery.rss.min.js'%}"></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="{% static 'blog/assets/js/main.js'%}"></script>
+</body>
+</html>
+
+
+

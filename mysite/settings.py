@@ -131,6 +131,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # DEFAULT_FROM_EMAIL = 'test@test.com'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'poramok@gmail.com'
-EMAIL_HOST_PASSWORD = 'csugkqbaqhjzztzv'
+EMAIL_HOST_PASSWORD = 'pxkutdpokbmlqvwr'
 EMAIL_PORT = 25
 EMAIL_USE_TLS = True

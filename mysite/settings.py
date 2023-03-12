@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -113,6 +114,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
@@ -127,4 +129,3 @@ EMAIL_HOST_USER = 'poramok@gmail.com'
 EMAIL_HOST_PASSWORD = 'pxkutdpokbmlqvwr'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static","media")
